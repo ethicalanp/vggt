@@ -29,10 +29,14 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print("Initializing and loading VGGT model...")
 # model = VGGT.from_pretrained("facebook/VGGT-1B")  # another way to load the model
 
-model = VGGT()
-_URL = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
-model.load_state_dict(torch.hub.load_state_dict_from_url(_URL))
+# model = VGGT()
+# _URL = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
+# model.load_state_dict(torch.hub.load_state_dict_from_url(_URL))
 
+model=VGGT()
+#load the model from a local file
+model_path=r"vggt/model.pt"
+model.load_state_dict(torch.load(model_path))
 
 model.eval()
 model = model.to(device)
@@ -687,4 +691,4 @@ with gr.Blocks(
         outputs=[reconstruction_output, target_dir_output, image_gallery, log_output],
     )
 
-    demo.queue(max_size=20).launch(show_error=True, share=True)
+    demo.queue(max_size=20).launch(show_error=True, share=False)
