@@ -3,7 +3,7 @@
 #
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
-
+# This script launches the training process using Hydra for configuration management.
 import argparse
 from hydra import initialize, compose
 from omegaconf import DictConfig, OmegaConf
